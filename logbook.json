@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "title": "Repro - ULSE Dynamic Graph Embedding (arXiv 2508.12674)",
+  "emoji": "🎯",
+  "space_id": "DineshAI/DjnbMWE0Ek",
+  "paper": null,
+  "tags": [
+    "icml2026-repro",
+    "paper-DjnbMWE0Ek"
+  ],
+  "updated_at": "2026-07-22T16:25:47+00:00",
+  "root": {
+    "slug": "index",
+    "title": "Repro - ULSE Dynamic Graph Embedding (arXiv 2508.12674)",
+    "file": "pages/index.md",
+    "children": [
+      {
+        "slug": "overview",
+        "title": "Overview",
+        "file": "pages/overview/page.md",
+        "children": []
+      },
+      {
+        "slug": "claim-1-cross-sectional",
+        "title": "Claim 1 — Cross-sectional",
+        "file": "pages/claim-1-cross-sectional/page.md",
+        "children": []
+      },
+      {
+        "slug": "claim-2-convergence",
+        "title": "Claim 2 — Convergence",
+        "file": "pages/claim-2-convergence/page.md",
+        "children": []
+      },
+      {
+        "slug": "claim-3-longitudinal",
+        "title": "Claim 3 — Longitudinal",
+        "file": "pages/claim-3-longitudinal/page.md",
+        "children": []
+      },
+      {
+        "slug": "claim-4-ulse-n2",
+        "title": "Claim 4 — ULSE-n2",
+        "file": "pages/claim-4-ulse-n2/page.md",
+        "children": []
+      },
+      {
+        "slug": "claim-5-dynamic-cheeger",
+        "title": "Claim 5 — Dynamic Cheeger",
+        "file": "pages/claim-5-dynamic-cheeger/page.md",
+        "children": []
+      },
+      {
+        "slug": "claim-5-dynamic-cheeger-exact",
+        "title": "Claim 5 — exact dynamic Cheeger audit",
+        "file": "pages/claim-5-dynamic-cheeger-exact/page.md",
+        "children": []
+      },
+      {
+        "slug": "methods",
+        "title": "Methods",
+        "file": "pages/methods/page.md",
+        "children": []
+      },
+      {
+        "slug": "conclusion",
+        "title": "Conclusion",
+        "file": "pages/conclusion/page.md",
+        "children": []
+      }
+    ]
+  },
+  "agent_view_tokens": 1514,
+  "revision": "1784737548035896000"
+}

@@ -1,0 +1,153 @@
+{
+  "cases": [
+    {
+      "T": 3,
+      "case": "repeated_complete_6",
+      "checks": {
+        "all_snapshot_cheeger_links_hold": true,
+        "all_weyl_links_hold": true,
+        "dynamic_lower_bound_holds": true,
+        "dynamic_upper_bound_holds": true,
+        "uses_unfolded_operator": true
+      },
+      "lambda_2_snapshots": [
+        1.1999999999999997,
+        1.1999999999999997,
+        1.1999999999999997
+      ],
+      "leave_one_out_operator_norms": [
+        1.6970562748477147,
+        1.6970562748477147,
+        1.6970562748477147
+      ],
+      "lower_nonvacuous": true,
+      "n": 6,
+      "phi_2_dynamic_max": 0.6,
+      "phi_2_snapshots_exhaustive": [
+        0.6,
+        0.6,
+        0.6
+      ],
+      "proposition_lower": 0.5999999999999998,
+      "proposition_upper_k2": 2.038853093816547,
+      "sigma_2_unfolded": 2.078460969082653
+    },
+    {
+      "T": 4,
+      "case": "repeated_complete_8",
+      "checks": {
+        "all_snapshot_cheeger_links_hold": true,
+        "all_weyl_links_hold": true,
+        "dynamic_lower_bound_holds": true,
+        "dynamic_upper_bound_holds": true,
+        "uses_unfolded_operator": true
+      },
+      "lambda_2_snapshots": [
+        1.1428571428571428,
+        1.1428571428571428,
+        1.1428571428571428,
+        1.1428571428571428
+      ],
+      "leave_one_out_operator_norms": [
+        1.979486637221574,
+        1.979486637221574,
+        1.979486637221574,
+        1.979486637221574
+      ],
+      "lower_nonvacuous": true,
+      "n": 8,
+      "phi_2_dynamic_max": 0.5714285714285714,
+      "phi_2_snapshots_exhaustive": [
+        0.5714285714285714,
+        0.5714285714285714,
+        0.5714285714285714,
+        0.5714285714285714
+      ],
+      "proposition_lower": 0.5714285714285714,
+      "proposition_upper_k2": 2.138089935299395,
+      "sigma_2_unfolded": 2.2857142857142856
+    },
+    {
+      "T": 3,
+      "case": "mixed_regular_8",
+      "checks": {
+        "all_snapshot_cheeger_links_hold": true,
+        "all_weyl_links_hold": true,
+        "dynamic_lower_bound_holds": true,
+        "dynamic_upper_bound_holds": true,
+        "uses_unfolded_operator": true
+      },
+      "lambda_2_snapshots": [
+        0.2928932188134525,
+        0.6666666666666663,
+        0.6666666666666662
+      ],
+      "leave_one_out_operator_norms": [
+        2.4875394908558492,
+        2.424168227005912,
+        2.4842085831271326
+      ],
+      "lower_nonvacuous": false,
+      "n": 8,
+      "phi_2_dynamic_max": 0.3333333333333333,
+      "phi_2_snapshots_exhaustive": [
+        0.25,
+        0.3333333333333333,
+        0.3333333333333333
+      ],
+      "proposition_lower": 0.0,
+      "proposition_upper_k2": 1.6894915298824233,
+      "sigma_2_unfolded": 1.4271908147722256
+    },
+    {
+      "T": 4,
+      "case": "mixed_regular_10",
+      "checks": {
+        "all_snapshot_cheeger_links_hold": true,
+        "all_weyl_links_hold": true,
+        "dynamic_lower_bound_holds": true,
+        "dynamic_upper_bound_holds": true,
+        "uses_unfolded_operator": true
+      },
+      "lambda_2_snapshots": [
+        0.19098300562505274,
+        0.460655337083368,
+        0.19098300562505274,
+        0.460655337083368
+      ],
+      "leave_one_out_operator_norms": [
+        3.4641016151377553,
+        3.4641016151377544,
+        3.4641016151377553,
+        3.464101615137755
+      ],
+      "lower_nonvacuous": false,
+      "n": 10,
+      "phi_2_dynamic_max": 0.3333333333333333,
+      "phi_2_snapshots_exhaustive": [
+        0.2,
+        0.3333333333333333,
+        0.2,
+        0.3333333333333333
+      ],
+      "proposition_lower": 0.0,
+      "proposition_upper_k2": 1.5198000619194705,
+      "sigma_2_unfolded": 1.1548961141052132
+    }
+  ],
+  "checks": {
+    "all_20_case_level_gates_pass": true,
+    "at_least_two_nonvacuous_dynamic_lower_bounds": true,
+    "every_conductance_is_exhaustive": true,
+    "varied_dynamic_graphs_included": true
+  },
+  "claim": "Proposition 1 dynamic Cheeger inequality for the unfolded normalized Laplacian",
+  "method": "direct unfolded operator; exhaustive phi_2 cuts; k=2 specialization",
+  "source": {
+    "retrieved_utc": "2026-07-22",
+    "scope": "Section 3.4, Proposition 1, its proof sketch, and the full supplementary proof",
+    "sha256": "1e0540aadecbed1e9abcf275cd289a2bd6a2a15c7096db54f0ab9c1ad5191fe0",
+    "url": "https://ar5iv.labs.arxiv.org/html/2508.12674"
+  },
+  "verdict": "supports"
+}
