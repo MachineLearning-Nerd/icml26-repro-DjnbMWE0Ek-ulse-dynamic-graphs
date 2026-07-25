@@ -303,14 +303,15 @@ def verify_claim2() -> dict:
         for i in range(len(n_values) - 1)
     )
 
-    # Check rho-parameterization: at largest n, larger rho => smaller mean error
+    # Check rho-parameterization: smaller rho => larger error (error ~ 1/rho^{1/2})
     largest_n = n_values[-1]
     rho_errors = {}
     for rho in rho_values:
         errs = [p["error"] for p in all_points if p["n"] == largest_n and p["rho"] == rho]
         rho_errors[rho] = float(np.mean(errs))
+    # rho_values is descending [1.0, 0.5, 0.25]; errors should be ascending
     rho_param_holds = all(
-        rho_errors[rho_values[i]] >= rho_errors[rho_values[i + 1]]
+        rho_errors[rho_values[i]] <= rho_errors[rho_values[i + 1]]
         for i in range(len(rho_values) - 1)
     )
 
