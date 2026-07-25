@@ -1,0 +1,9 @@
+[project]
+name = "ulse-repro"
+version = "0.1.0"
+description = "Reproduction of ULSE (arXiv 2508.12674) theorem verification"
+requires-python = ">=3.11,<3.14"
+dependencies = ["numpy>=2.0,<3.0", "scipy>=1.13,<2.0"]
+
+[tool.uv]
+package = false
