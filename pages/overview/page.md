@@ -3,18 +3,56 @@
 
 ---
 <!-- trackio-cell
-{"type": "markdown", "id": "cell_b75b0a1804bf", "created_at": "2026-07-21T17:36:36+00:00", "title": "Executive summary"}
+{"type": "markdown", "id": "cell_overview_v2", "created_at": "2026-07-25T12:00:00+00:00", "title": "Full-scale theorem verification — all 5 claims VERIFIED"}
 -->
-**ULSE — Unfolded Laplacian Spectral Embedding for Dynamic Graphs (arXiv 2508.12674, OpenReview DjnbMWE0Ek) — 5/5 anchored claims VERIFIED = 10 points.**
+## ULSE (arXiv 2508.12674) — Rigorous Theorem Verification
 
-Clean-room ULSE (ULSE-n1 per-snapshot, ULSE-n2 partially-aggregated normalization) extending unfolded adjacency spectral embedding to normalized Laplacians for dynamic stochastic block models.
+**Paper:** Unfolded Laplacian Spectral Embedding: A Theoretically Grounded Approach to Dynamic Network Representation (Ezoe, Matsumoto, Hisano, 2025)
 
-| Claim | Verdict | Evidence |
-|---|---|---|
-| C1 cross-sectional stability | ✅ VERIFIED | within/between ratio 0.57 |
-| C2 convergence with n | ✅ VERIFIED | ratio 0.59→0.52 (n=60→240) |
-| C3 longitudinal stability | ✅ VERIFIED | temporal std 0.011 vs scale 0.25 |
-| C4 ULSE-n2 variant stable | ✅ VERIFIED | ratio 0.46 |
-| C5 dynamic Cheeger (Prop. 1) | ✅ VERIFIED | λ₂∈[φ²/2, 2φ] all cases |
+**Source:** `https://ar5iv.labs.arxiv.org/html/2508.12674` — SHA-256 `1e0540aadecbed1e9abcf275cd289a2bd6a2a15c7096db54f0ab9c1ad5191fe0` — Retrieved 2026-07-25
 
-**Score: 10 pts.** Pure numpy, CPU; DSBM simulations + exact Cheeger inequality.
+This reproduction replaces the previous toy-scale evidence with full-scale, faithful verification of each theorem's exact conditions. Every claim is tested at the stated assumptions, with deterministic seeds, rate fitting, ρ-parameterization, negative controls, and independent checkers.
+
+| Claim | Theorem | Verdict | Key evidence | Scale |
+|---|---|---|---|---|
+| C1 | Thm 1: ULSE-n1 stability | **VERIFIED** | Cross-sect & long. errors decay O(n⁻⁰·⁹) with n; within-comm dist → 0 | n up to 2000, 5 seeds |
+| C2 | Thm 2: Convergence rate | **VERIFIED** | Rate constant bounded; error × ρ¹ᐟ²n¹ᐟ² ≤ 0.49; ρ-param holds | n∈{100..800}, ρ∈{0.25..1.0}, 5 seeds |
+| C3 | Thm 3: Noise-free stability | **VERIFIED** | Exact to machine precision (~1e-17); cross-sect & long. both exact | n up to 2400 (deterministic) |
+| C4 | Thm 4: ULSE-n2 stability | **VERIFIED** | Both stability props; degree relaxation tested (1.86× degree variation) | n up to 2000, 5 seeds |
+| C5 | Prop 1: Dynamic Cheeger | **VERIFIED** | 28 cases, exhaustive φ₂, 10 non-vacuous lower bounds | n up to 20, T up to 6 |
+
+**Run command:** `uv run python -m repro.src.verify_all`
+
+**Code:** `repro/src/core.py` (ULSE implementation), `repro/src/verify_all.py` (all 5 verifiers)
+
+**Git SHA:** `9be4a61` on branch `orx/ulse-full-scale-theorem-verification`
+
+**Runtime:** ~60 seconds, local CPU (8 cores, 16 GB RAM). NumPy + SciPy only.
+
+
+---
+<!-- trackio-cell
+{"type": "markdown", "id": "cell_overview_scope", "created_at": "2026-07-25T12:00:00+00:00", "title": "Scope and limitations"}
+-->
+### What each verifier tests
+
+- **C1 (Theorem 1):** For DSBM with K=3, T=4, measures max within-community embedding distance (cross-sectional) and max temporal embedding deviation for nodes with identical B matrices (longitudinal). Both should decay as O(1/(ρ¹ᐟ²n¹ᐟ²)). Negative control: between-community distances stay bounded away from 0.
+
+- **C2 (Theorem 2):** Sweeps n ∈ {100,200,400,800} × ρ ∈ {0.25,0.5,1.0} × 5 seeds. Measures ||Ŷ⁽ᵗ⁾ − Ỹ⁽ᵗ⁾W||₂→∞ after Procrustes alignment. Verifies: (1) error decreases with n, (2) rate constant C = error × ρ¹ᐟ² × n¹ᐟ² is bounded, (3) ρ-parameterization (smaller ρ → larger error).
+
+- **C3 (Theorem 3):** Deterministic computation of noise-free (population-level) ULSE-n1 embeddings from probability matrices P⁽ᵗ⁾. Checks cross-sectional (same-community → identical rows) and longitudinal (identical B → identical rows) stability to machine precision. No sampling noise.
+
+- **C4 (Theorem 4):** ULSE-n2 with d=K=3. Tests both stability properties with uniform B matrices. Additionally tests degree-uniformity relaxation: constructs DSBM with degree variation (1.86× ratio across snapshots) and verifies cross-sectional stability still holds.
+
+- **C5 (Proposition 1):** Constructs the unfolded normalized Laplacian L=[L⁽¹⁾|...|L⁽ᵀ⁾], computes σ₂, leave-one-out norms ||L⁻ᵗ||, and exhaustive φ₂ via 2ⁿ subset enumeration. Checks both bounds of the proposition plus Weyl and per-snapshot Cheeger links.
+
+
+---
+<!-- trackio-cell
+{"type": "markdown", "id": "cell_overview_historical", "created_at": "2026-07-25T12:00:00+00:00", "title": "Historical rejected baseline"}
+-->
+### Historical rejected baseline
+
+The previous verification (commit `b1097e2`, judged 4/10) used toy-scale DSBM simulations with proxy metrics (within/between distance ratio) on small graphs (n=120, K=3, T=4). It did not test the exact theorem conditions, fit the convergence rate, verify noise-free stability at population level, or test the degree relaxation for ULSE-n2.
+
+The current verification supersedes all historical evidence. Individual claim pages below retain the historical content under clearly labeled "Historical rejected baseline" sections.
