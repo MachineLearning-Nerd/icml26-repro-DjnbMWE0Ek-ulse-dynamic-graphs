@@ -50,7 +50,7 @@ exit 0 · 60s
 
 ---
 <!-- trackio-cell
-{"type": "markdown", "id": "c1_v2_results", "created_at": "2026-07-25T12:00:00+00:00", "title": "Results — VERIFIED"}
+{"type": "markdown", "id": "c1_v2_results", "created_at": "2026-07-25T12:00:00+00:00", "title": "Results — FINITE PROXY PASS"}
 -->
 ## Results
 
@@ -61,11 +61,13 @@ exit 0 · 60s
 | 1000 | 0.0056 ± 0.001 | 0.0051 | 0.0297 | 0.0316 |
 | 2000 | 0.0030 ± 0.000 | 0.0027 | 0.0209 | 0.0224 |
 
-**Decay exponent:** cross-sectional = 0.882, longitudinal = 0.877 (both > 0.5, confirming O(n⁻¹ᐟ²) upper bound)
+**Decay exponent:** cross-sectional = 0.882, longitudinal = 0.877 (both > 0.5, consistent with the finite O(n⁻¹ᐟ²) diagnostic)
 
 **Rate constant** (error × ρ¹ᐟ² × n¹ᐟ²): 0.33 → 0.14 (non-increasing, bounded above by 0.33)
 
-**VERDICT: VERIFIED.** Both cross-sectional and longitudinal errors decay to zero at rate ≥ O(1/(ρ¹ᐟ²n¹ᐟ²)), confirming Theorem 1. Between-community distances remain bounded, confirming the negative control.
+**FINITE PROXY PASS.** Both selected errors decay in this DSBM sweep and
+between-community distances remain bounded. This is finite evidence consistent
+with Theorem 1, not theorem-level verification.
 
 **Code:** `repro/src/verify_all.py` → `verify_claim1()`
 

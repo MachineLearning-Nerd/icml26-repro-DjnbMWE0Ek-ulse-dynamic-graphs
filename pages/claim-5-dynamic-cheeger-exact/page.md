@@ -4,13 +4,14 @@
 <!-- trackio-cell
 {"type":"markdown","id":"c5_dynamic_scope","created_at":"2026-07-22T16:25:47+00:00","title":"Proposition 1 exact scope"}
 -->
-## Claim — supported at the actual dynamic-operator level
+## Claim — finite dynamic-operator proxy
 
 Proposition 1 bounds the dynamic `k`-way conductance
 `phi_k(G) = max_t phi_k(G^(t))` using the singular value `sigma_k` of the
 **unfolded normalized Laplacian**, together with the norm of each unfolded
 operator with snapshot `t` removed. This audit replaces the earlier static-only
-check with the exact dynamic quantities in the proposition.
+check with the dynamic quantities in the proposition for selected finite graph
+families.
 
 Paper source: `https://ar5iv.labs.arxiv.org/html/2508.12674` (retrieved
 2026-07-22; scope: Section 3.4, Proposition 1, proof sketch, and full
@@ -90,7 +91,7 @@ explicit zero-clipping branch.
 
 ---
 <!-- trackio-cell
-{"type":"code","id":"c5_dynamic_independent","created_at":"2026-07-22T16:25:47+00:00","title":"Independent exact proof-chain audit","command":["python3","repro/src/audit_dynamic_cheeger_proof_chain.py"],"exit_code":0,"duration_s":0.1}
+{"type":"code","id":"c5_dynamic_independent","created_at":"2026-07-22T16:25:47+00:00","title":"Bounded proof-chain witness audit","command":["python3","repro/src/audit_dynamic_cheeger_proof_chain.py"],"exit_code":0,"duration_s":0.1}
 -->
 ````bash
 $ python3 repro/src/audit_dynamic_cheeger_proof_chain.py
@@ -110,11 +111,10 @@ verdict: supports
 ````
 
 The independent standard-library script shares no graph or linear-algebra code.
-Using exact fractions, it verifies the general-`k` implication used by the
-paper: the two Weyl inequalities and the per-snapshot higher-order Cheeger
-bounds imply both displayed dynamic bounds. It covers 288 premise-satisfying
-witness families, 272 with a positive lower radicand, plus three fail-sensitive
-controls.
+Using exact fractions, it checks the implication on 288 selected
+premise-satisfying witness families, 272 with a positive lower radicand, plus
+three fail-sensitive controls. This is a bounded witness audit, not a proof
+over every admissible graph.
 
 ---
 <!-- trackio-cell
@@ -122,12 +122,12 @@ controls.
 -->
 ## Result
 
-**Supported.** The audit directly measures the unfolded spectrum, the
+**FINITE PROXY PASS.** The audit directly measures the unfolded spectrum, the
 leave-one-snapshot-out norms, and the worst snapshot conductance required by
 Proposition 1. All 20 numerical case gates pass, including two tight,
-non-vacuous lower bounds. The independent rational audit confirms the full
-proof-chain implication rather than substituting the ordinary static Cheeger
-inequality for the dynamic claim.
+non-vacuous lower bounds. The independent rational audit checks the
+proof-chain implication on selected witnesses; paper-level verification
+remains out of scope.
 
 Artifacts:
 

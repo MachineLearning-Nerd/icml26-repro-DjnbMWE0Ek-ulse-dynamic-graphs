@@ -38,7 +38,7 @@ n ∈ {300, 600, 1200, 2400}.
 
 ---
 <!-- trackio-cell
-{"type": "markdown", "id": "c3_v2_results", "created_at": "2026-07-25T12:00:00+00:00", "title": "Results — VERIFIED (exact to machine precision)"}
+{"type": "markdown", "id": "c3_v2_results", "created_at": "2026-07-25T12:00:00+00:00", "title": "Results — FINITE PROXY PASS (near machine precision)"}
 -->
 ## Results
 
@@ -49,13 +49,18 @@ n ∈ {300, 600, 1200, 2400}.
 | 1200 | 1.39 × 10⁻¹⁷ | 0 (exact) | 0.000064 |
 | 2400 | 1.04 × 10⁻¹⁷ | 0 (exact) | 0.000023 |
 
-Cross-sectional errors are at machine precision (~10⁻¹⁷), confirming that nodes with identical latent positions receive identical noise-free embeddings.
+Cross-sectional errors are near machine precision (~10⁻¹⁷), showing that the
+selected population construction gives identical embeddings for identical
+latent positions.
 
-Longitudinal errors are exactly 0, confirming that snapshots with identical B matrices produce identical embeddings for every node.
+Longitudinal errors are exactly 0 in the selected construction, showing that
+repeated B matrices produce identical embeddings there.
 
 Negative control: different-community embeddings are well-separated (min distance > 0).
 
-**VERDICT: VERIFIED.** The noise-free ULSE-n1 embeddings satisfy both stability properties exactly, at machine precision, for all tested n values up to 2400.
+**FINITE PROXY PASS.** The selected finite population constructions satisfy
+both identities to floating-point tolerance. This is not a proof for every
+admissible population model.
 
 **Code:** `repro/src/verify_all.py` → `verify_claim3()`
 

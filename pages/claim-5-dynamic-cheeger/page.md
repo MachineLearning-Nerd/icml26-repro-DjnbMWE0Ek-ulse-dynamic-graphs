@@ -37,7 +37,7 @@ For k=2, we construct the unfolded normalized Laplacian and verify both bounds:
 
 ---
 <!-- trackio-cell
-{"type": "markdown", "id": "c5_v2_results", "created_at": "2026-07-25T12:00:00+00:00", "title": "Results — VERIFIED"}
+{"type": "markdown", "id": "c5_v2_results", "created_at": "2026-07-25T12:00:00+00:00", "title": "Results — FINITE PROXY PASS"}
 -->
 ## Results
 
@@ -62,7 +62,9 @@ The non-vacuous lower bounds are tight (lower = φ₂ for complete graphs).
 
 All Weyl links and per-snapshot Cheeger inequalities hold in every case.
 
-**VERDICT: VERIFIED.** The dynamic Cheeger inequality holds for all 28 test cases with n up to 20 and T up to 6, including 10 cases with non-vacuous, tight lower bounds.
+**FINITE PROXY PASS.** Both inequality directions hold for the 28 selected
+finite cases, including 10 non-vacuous lower bounds. This does not replace the
+general proposition or its proof.
 
 **Code:** `repro/src/verify_all.py` → `verify_claim5()`. Also see independent audit: `repro/src/verify_dynamic_cheeger_exact.py` and `repro/src/audit_dynamic_cheeger_proof_chain.py`
 

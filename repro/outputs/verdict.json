@@ -1,0 +1,94 @@
+{
+  "paper": "DjnbMWE0Ek",
+  "title": "Unfolded Laplacian Spectral Embedding: A Theoretically Grounded Approach to Dynamic Network Representation",
+  "authors": [
+    "Haruka Ezoe",
+    "Hiroki Matsumoto",
+    "Ryohei Hisano"
+  ],
+  "arxiv": "2508.12674",
+  "arxiv_version_pinned": "v2 (last revised 2026-02-23)",
+  "openreview": "DjnbMWE0Ek",
+  "scope": "Independent finite DSBM, population-identity, degree-relaxation, and dynamic-Cheeger diagnostics; no proof verification or full empirical reproduction.",
+  "claims": {
+    "c1": {
+      "paper_statement": "Theorem 1 gives ULSE-n1 cross-sectional and longitudinal stability under the stated asymptotic model conditions.",
+      "finite_proxy_passed": true,
+      "paper_claim_verified": false,
+      "status": "FINITE_DSBM_STABILITY_PROXY",
+      "raw_verdict": "FINITE_PROXY_PASS",
+      "evidence_source": "repro/outputs/verify_all_results.json#claim1_theorem1",
+      "limitations": [
+        "The run uses finite DSBM instances, fixed K/T, rho=1, five seeds, and a finite n sweep.",
+        "Numerical decay does not establish the almost-sure theorem or its full inhomogeneous random-graph scope."
+      ]
+    },
+    "c2": {
+      "paper_statement": "Theorem 2 gives an O(1/(rho^1/2 n^1/2)) two-to-infinity convergence bound for ULSE-n1.",
+      "finite_proxy_passed": true,
+      "paper_claim_verified": false,
+      "status": "FINITE_RATE_PROXY",
+      "raw_verdict": "FINITE_PROXY_PASS",
+      "evidence_source": "repro/outputs/verify_all_results.json#claim2_theorem2",
+      "limitations": [
+        "The rate fit tests selected finite DSBM samples and a bounded diagnostic constant.",
+        "A finite slope and parameter sweep do not prove an asymptotic almost-sure upper bound."
+      ]
+    },
+    "c3": {
+      "paper_statement": "Theorem 3 gives exact noise-free cross-sectional and longitudinal ULSE-n1 stability.",
+      "finite_proxy_passed": true,
+      "paper_claim_verified": false,
+      "status": "FINITE_POPULATION_IDENTITY_PROXY",
+      "raw_verdict": "FINITE_PROXY_PASS",
+      "evidence_source": "repro/outputs/verify_all_results.json#claim3_theorem3",
+      "limitations": [
+        "The check evaluates selected finite probability matrices in IEEE floating point.",
+        "Machine-precision agreement in those constructions is not a proof for every admissible population model."
+      ]
+    },
+    "c4": {
+      "paper_statement": "Theorem 4 gives ULSE-n2 stability and supports a degree-uniformity relaxation.",
+      "finite_proxy_passed": true,
+      "paper_claim_verified": false,
+      "status": "FINITE_DEGREE_RELAXATION_PROXY",
+      "raw_verdict": "FINITE_PROXY_PASS",
+      "evidence_source": "repro/outputs/verify_all_results.json#claim4_theorem4",
+      "limitations": [
+        "The run uses finite DSBM samples and a selected degree-varying construction.",
+        "It does not establish the theorem, its full assumptions, or a general degree-relaxation result."
+      ]
+    },
+    "c5": {
+      "paper_statement": "Proposition 1 gives dynamic Cheeger bounds for the unfolded normalized Laplacian.",
+      "finite_proxy_passed": true,
+      "paper_claim_verified": false,
+      "status": "FINITE_CHEEGER_PROXY",
+      "raw_verdict": "FINITE_PROXY_PASS",
+      "evidence_source": "repro/outputs/verify_all_results.json#claim5_proposition1",
+      "limitations": [
+        "The exhaustive conductance calculation covers 28 finite graphs with n<=20 and T<=6.",
+        "Finite inequality checks do not replace the proposition's general proof or all graph sizes."
+      ]
+    }
+  },
+  "overall_status": "INCONCLUSIVE",
+  "finite_proxy_diagnostics_passed": 5,
+  "finite_proxy_diagnostics_total": 5,
+  "paper_claims_verified": 0,
+  "paper_claims_total": 5,
+  "full_paper_reproduction": false,
+  "raw_run_source": {
+    "retrieved_utc": "2026-07-25",
+    "scope": "Sections 3.1-3.4, Theorems 1-4, Proposition 1, Appendices B-F",
+    "sha256": "1e0540aadecbed1e9abcf275cd289a2bd6a2a15c7096db54f0ab9c1ad5191fe0",
+    "url": "https://ar5iv.labs.arxiv.org/html/2508.12674"
+  },
+  "not_reproduced": [
+    "theorem proofs and almost-sure asymptotics",
+    "the full inhomogeneous random-graph parameter space",
+    "the general ULSE-n1/n2 assumptions and constants",
+    "real-world dynamic-network experiments",
+    "paper-scale baselines, figures, and ablations"
+  ]
+}

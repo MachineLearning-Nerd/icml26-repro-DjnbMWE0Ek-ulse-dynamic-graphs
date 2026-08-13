@@ -1,9 +1,9 @@
-"""Comprehensive verification of all 5 claims from arXiv 2508.12674.
+"""Run bounded finite diagnostics for five claims from arXiv 2508.12674.
 
 Each verifier directly tests the exact theorem conditions stated in the paper.
 The script prints all results to stdout and saves raw data to JSON.
 
-Claims verified:
+Diagnostics:
   Claim 1 (Theorem 1): ULSE-n1 cross-sectional + longitudinal stability
   Claim 2 (Theorem 2): Convergence rate O(1/(rho^{1/2} n^{1/2}))
   Claim 3 (Theorem 3): Noise-free embedding stability (exact population level)
@@ -176,7 +176,7 @@ def verify_claim3() -> dict:
         print(f"  n={n:5d}: cross_err={max_cross_err:.2e} long_err={max_long_err:.2e} "
               f"min_diff_comm={min_diff_comm:.6f} => {'PASS' if case_pass else 'FAIL'}")
 
-    results["verdict"] = "VERIFIED" if all_pass else "FALSIFIED"
+    results["verdict"] = "FINITE_PROXY_PASS" if all_pass else "FINITE_PROXY_FAIL"
     results["tolerance"] = 1e-8
     print(f"  VERDICT: {results['verdict']}")
     return results
@@ -322,8 +322,8 @@ def verify_claim2() -> dict:
     # Slope >= 0.5 means error decays at least as fast as n^{-0.5}
     slope_passes = slope >= 0.5
 
-    verdict = "VERIFIED" if (error_decreasing and constants_nonincreasing and
-                            rho_param_holds and slope_passes) else "INCONCLUSIVE"
+    verdict = "FINITE_PROXY_PASS" if (error_decreasing and constants_nonincreasing and
+                                      rho_param_holds and slope_passes) else "FINITE_PROXY_FAIL"
 
     results = {
         "n_values": n_values,
@@ -485,7 +485,7 @@ def verify_claim1() -> dict:
     cross_constants = [r["cross_rate_ratio"] for r in all_results]
     long_constants = [r["long_rate_ratio"] for r in all_results]
 
-    verdict = "VERIFIED" if cross_decreasing and cross_decay_exp > 0.3 else "INCONCLUSIVE"
+    verdict = "FINITE_PROXY_PASS" if cross_decreasing and cross_decay_exp > 0.3 else "FINITE_PROXY_FAIL"
 
     results = {
         "cases": all_results,
@@ -676,7 +676,7 @@ def verify_claim4() -> dict:
     c_cross, _, _, _ = np.linalg.lstsq(A_mat, np.log(cross_means), rcond=None)
     cross_decay_exp = -c_cross[1]
 
-    verdict = "VERIFIED" if cross_decreasing and cross_decay_exp > 0.3 else "INCONCLUSIVE"
+    verdict = "FINITE_PROXY_PASS" if cross_decreasing and cross_decay_exp > 0.3 else "FINITE_PROXY_FAIL"
 
     results = {
         "uniform_B_cases": all_results,
@@ -873,7 +873,7 @@ def verify_claim5() -> dict:
         "max_n": max_n,
         "max_T": max_T,
     }
-    results["verdict"] = "VERIFIED" if all_pass else "FALSIFIED"
+    results["verdict"] = "FINITE_PROXY_PASS" if all_pass else "FINITE_PROXY_FAIL"
 
     print(f"\n  Total cases: {n_cases}, Max n: {max_n}, Max T: {max_T}")
     print(f"  Non-vacuous lower bounds: {n_nonvacuous}")
@@ -887,7 +887,7 @@ def verify_claim5() -> dict:
 # ---------------------------------------------------------------------------
 
 def main() -> int:
-    print("ULSE Theorem Verification (arXiv 2508.12674)")
+    print("ULSE finite diagnostics (arXiv 2508.12674v2)")
     print(f"Source: {SOURCE_URL}")
     print(f"SHA-256: {SOURCE_SHA256}")
     print(f"Scope: {SOURCE_SCOPE}")
@@ -938,9 +938,9 @@ def main() -> int:
     print(f"RESULTS_SHA256={hashlib.sha256(payload.encode()).hexdigest()}")
     print(f"Total elapsed: {elapsed:.1f}s")
 
-    # Exit nonzero if any claim fails
-    all_verified = all(v in ("VERIFIED", "SUPPORTED") for v in verdicts.values())
-    return 0 if all_verified else 1
+    # Exit nonzero if any finite diagnostic fails.
+    all_passed = all(v == "FINITE_PROXY_PASS" for v in verdicts.values())
+    return 0 if all_passed else 1
 
 
 if __name__ == "__main__":

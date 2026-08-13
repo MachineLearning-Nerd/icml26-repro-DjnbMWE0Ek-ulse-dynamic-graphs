@@ -38,7 +38,7 @@ Sweep n ∈ {100, 200, 400, 800} × ρ ∈ {0.25, 0.5, 1.0} × 5 seeds. For each
 
 ---
 <!-- trackio-cell
-{"type": "markdown", "id": "c2_v2_results", "created_at": "2026-07-25T12:00:00+00:00", "title": "Results — VERIFIED"}
+{"type": "markdown", "id": "c2_v2_results", "created_at": "2026-07-25T12:00:00+00:00", "title": "Results — FINITE PROXY PASS"}
 -->
 ## Results
 
@@ -61,13 +61,14 @@ Sweep n ∈ {100, 200, 400, 800} × ρ ∈ {0.25, 0.5, 1.0} × 5 seeds. For each
 | 0.5 | 0.00839 | 1.41 |
 | 0.25 | 0.01337 | 2.00 |
 
-Error increases as ρ decreases, confirming the ρ¹ᐟ² dependence.
+Error increases as ρ decreases, consistent with the finite ρ-dependence diagnostic.
 
 **Log-log fit:** slope = 1.655, R² = 0.967. Slope > 1 means actual convergence is *faster* than the theoretical O(n⁻¹ᐟ²) bound — consistent with an upper bound.
 
 **Per-ρ slopes:** ρ=1.0: 1.80, ρ=0.5: 1.77, ρ=0.25: 1.87 (all > 0.5)
 
-**VERDICT: VERIFIED.** The O(1/(ρ¹ᐟ²n¹ᐟ²)) upper bound holds: the rate constant is bounded, the error decreases with n, and the ρ-parameterization is confirmed.
+**FINITE PROXY PASS.** The finite scaled-error, n-sweep, and ρ-ordering
+criteria pass. They do not establish the paper's asymptotic upper bound.
 
 **Code:** `repro/src/verify_all.py` → `verify_claim2()`
 

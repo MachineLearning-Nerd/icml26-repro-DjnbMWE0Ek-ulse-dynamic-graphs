@@ -1,68 +1,58 @@
-# ULSE Theorem Verification: Full-Scale Reproduction
+# ULSE finite-evidence audit
 
 ![Convergence rate and stability decay](images/fig1_convergence_stability.png)
 
 ## Central question
 
-Does the Unfolded Laplacian Spectral Embedding (ULSE) method from arXiv 2508.12674 actually satisfy the stability and convergence properties its theorems claim? The paper proves five results — cross-sectional stability, longitudinal stability, convergence rate, noise-free stability, and a dynamic Cheeger inequality — but these are asymptotic mathematical statements. We verify each one numerically at the paper's stated assumptions, testing the *exact* theorem conditions rather than proxy metrics.
+Do bounded clean-room experiments behave consistently with the stability and
+dynamic-Cheeger statements in arXiv 2508.12674? The run provides finite
+numerical evidence for five selected constructions. It does not verify the
+paper's proofs, almost-sure asymptotics, or complete empirical program.
 
 ## Implementation
 
-The ULSE method extends Unfolded Adjacency Spectral Embedding (UASE) to normalized Laplacians. Given T snapshots of a dynamic graph, it constructs per-snapshot normalized Laplacians, horizontally concatenates them into an unfolded operator, and extracts a low-dimensional embedding from its spectrum.
+ULSE-n1 and ULSE-n2 are implemented from scratch in `repro/src/core.py`.
+Given dynamic graph snapshots, the code constructs normalized Laplacians,
+forms the unfolded operator, and extracts the requested spectral embedding.
+The finite run uses DSBM probability matrices and sampled adjacency matrices,
+plus small graph families for the dynamic-Cheeger calculation.
 
-We implemented ULSE-n1 and ULSE-n2 from scratch in `repro/src/core.py`, matching both the paper's mathematical definitions and the official code. The key implementation choices:
-
-**ULSE-n1** uses per-snapshot normalization L⁽ᵗ⁾ = I − D⁻¹ᐟ²A⁽ᵗ⁾D⁻¹ᐟ², selects the K−1 smallest non-trivial singular values (d = K−1), and applies a correction term Ŷ⁽ᵗ⁾ = (L⁽ᵗ⁾ − I)UΣ⁻¹ᐟ². We use eigendecomposition of LL^T rather than full SVD for numerical stability with large graphs.
-
-**ULSE-n2** uses partially aggregated normalization L⁽ᵗ⁾ = −D^{(1:T)}⁻¹ᐟ²A⁽ᵗ⁾D⁽ᵗ⁾⁻¹ᐟ², selects the top K singular values (d = K), and uses no correction term.
-
-A critical finding: the paper's main text specifies the correction term as UΣ¹ᐟ², but the official code and appendix proof use UΣ⁻¹ᐟ². We verified that only Σ⁻¹ᐟ² produces exact noise-free stability.
+The paper's main text and its code/appendix use different exponents for one
+correction term. This audit follows the code/appendix convention and records
+that choice explicitly; agreement under that convention is not theorem proof.
 
 ## Results by claim
 
-### Claim 3: Noise-free stability is exact (Theorem 3)
+| Claim | Finite result | Scope |
+|---|---|---|
+| C1: Theorem 1 | `FINITE_PROXY_PASS` | Five-seed DSBM sweep, `n` up to 2000; cross-sectional and selected longitudinal errors decay |
+| C2: Theorem 2 | `FINITE_PROXY_PASS` | `n` × `rho` sweep, five seeds; finite scaled-error constant ≤ 0.49 and slope 1.655 |
+| C3: Theorem 3 | `FINITE_PROXY_PASS` | Deterministic population matrices, `n` up to 2400; selected identities agree near 1e-17 |
+| C4: Theorem 4 | `FINITE_PROXY_PASS` | ULSE-n2 DSBM sweep and one degree-varying construction with about 1.86x degree ratio |
+| C5: Proposition 1 | `FINITE_PROXY_PASS` | 28 finite graphs, `n` up to 20 and `T` up to 6; 10 lower bounds non-vacuous |
 
-![Noise-free stability at machine precision](images/fig2_noisefree.png)
-
-The strongest result. Theorem 3 states that noise-free (population-level) ULSE-n1 embeddings satisfy both cross-sectional and longitudinal stability *exactly*. Since these are deterministic functions of the probability matrices P⁽ᵗ⁾, we can verify this without any sampling:
-
-For n up to 2400 nodes, the maximum cross-sectional error between same-community embeddings is **~10⁻¹⁷** — at IEEE 754 double precision. The longitudinal error for snapshots with identical B matrices is **exactly 0**. This is not a statistical claim; it is an exact algebraic identity confirmed numerically.
-
-### Claims 1 & 2: Stability and convergence at scale
-
-For finite-sample embeddings, the theorems predict O(1/(ρ¹ᐟ²n¹ᐟ²)) convergence. We swept n ∈ {100,...,2000} and ρ ∈ {0.25, 0.5, 1.0}:
-
-- Both cross-sectional and longitudinal embedding errors decay monotonically with n (exponent ~0.88)
-- The rate constant C = error × ρ¹ᐟ² × n¹ᐟ² is bounded above by 0.49 and non-increasing
-- The ρ-parameterization holds: halving ρ increases the error by ~√2 as predicted
-- Between-community distances remain bounded (negative control)
-
-### Claim 4: ULSE-n2 degree relaxation
-
-ULSE-n2 relaxes the degree-uniformity assumption needed for ULSE-n1's longitudinal stability. We tested this by constructing a DSBM with 1.86× degree variation across snapshots — cross-sectional stability still holds, confirming the relaxation.
-
-### Claim 5: Dynamic Cheeger inequality
-
-![Dynamic Cheeger bounds](images/fig3_cheeger.png)
-
-We verified the proposition on 28 diverse dynamic graph instances (n up to 20, T up to 6), including complete graphs, cycles, paths, and random graphs. All cases satisfy both bounds. Ten cases produce non-vacuous (positive) lower bounds that are tight for complete graphs.
+The canonical paper-level result is **0/5 claims independently verified** and
+overall **INCONCLUSIVE**. A finite pass means only that the local criterion
+passed for the selected construction.
 
 ## Limitations
 
-- Finite-sample claims (1, 2, 4) are verified on DSBM, which is the model assumed in the paper's proofs
-- Exhaustive conductance (Claim 5) is limited to n ≤ 20 due to 2ⁿ complexity
-- The supplementary material lacks a proof of Theorem 4 despite the paper's claim; our numerical evidence corroborates it
+- C1, C2, and C4 use finite DSBM instances and selected parameter sweeps.
+- C3 checks finite population identities in floating-point arithmetic.
+- C5 uses exhaustive conductance only where `2^n` enumeration is tractable.
+- The proof arguments, almost-sure limits, general constants, and broader
+  inhomogeneous random-graph cases are not reproduced.
+- Real-world dynamic-network data, baselines, figures, and ablations are not
+  reproduced.
 
-## Assessment
+## Reproduce the audit
 
-| Claim | Verdict | Confidence |
-|---|---|---|
-| C1: ULSE-n1 stability | VERIFIED | HIGH |
-| C2: Convergence rate | VERIFIED | HIGH |
-| C3: Noise-free stability | VERIFIED | HIGH (exact) |
-| C4: ULSE-n2 stability | VERIFIED | HIGH |
-| C5: Dynamic Cheeger | VERIFIED | HIGH |
+```bash
+uv run python -m repro.src.verify_all
+uv run python -m repro.src.finalize_gate
+```
 
-**Experiment branch:** `orx/ulse-full-scale-theorem-verification`  
-**Run command:** `uv run python -m repro.src.verify_all`  
-**Runtime:** ~60 seconds, local CPU
+Raw measurements are written to `repro/outputs/verify_all_results.json`.
+The conservative machine-readable ledger is written to
+`repro/outputs/verdict.json`; it deliberately separates finite proxy passes
+from paper-level verification.

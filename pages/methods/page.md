@@ -17,7 +17,7 @@
 4. **Selection:** Bottom K eigenpairs, exclude smallest (trivial), take K−1 informative directions (d = K−1)
 5. **Embedding:** Ŷ⁽ᵗ⁾ = (L⁽ᵗ⁾ − I) U Σ⁻¹ᐟ² (derived from V⁽ᵗ⁾Σ¹ᐟ² − UΣ⁻¹ᐟ² via V⁽ᵗ⁾ = L⁽ᵗ⁾UΣ⁻¹)
 
-**Note on correction term:** The paper's main text states Ŷ⁽ᵗ⁾ = V⁽ᵗ⁾Σ¹ᐟ² − UΣ¹ᐟ², but the official code and Appendix C proof use Σ⁻¹ᐟ². We verified that Σ⁻¹ᐟ² produces exact noise-free stability while Σ¹ᐟ² does not. We follow the code/appendix version.
+**Note on correction term:** The paper's main text states Ŷ⁽ᵗ⁾ = V⁽ᵗ⁾Σ¹ᐟ² − UΣ¹ᐟ², but the official code and Appendix C proof use Σ⁻¹ᐟ². The finite population diagnostic produces exact agreement with Σ⁻¹ᐟ² in the selected construction while Σ¹ᐟ² does not. We follow the code/appendix version.
 
 ### ULSE-n2 (Theorem 4)
 

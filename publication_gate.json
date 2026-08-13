@@ -1,0 +1,13 @@
+{
+  "paper": "DjnbMWE0Ek",
+  "arxiv": "2508.12674",
+  "arxiv_version_pinned": "v2 (last revised 2026-02-23)",
+  "tests_passed": true,
+  "publication_gate_passed": true,
+  "overall_status": "INCONCLUSIVE",
+  "finite_proxy_diagnostics_passed": 5,
+  "finite_proxy_diagnostics_total": 5,
+  "claims_verified": 0,
+  "claims_total": 5,
+  "full_paper_reproduction": false
+}

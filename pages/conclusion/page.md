@@ -3,26 +3,29 @@
 
 ---
 <!-- trackio-cell
-{"type": "markdown", "id": "conclusion_v2", "created_at": "2026-07-25T12:00:00+00:00", "title": "All 5 theorems VERIFIED with full-scale evidence"}
+{"type": "markdown", "id": "conclusion_v2", "created_at": "2026-07-25T12:00:00+00:00", "title": "Five finite diagnostics pass; paper-level result INCONCLUSIVE"}
 -->
-## Outcome: 5/5 claims VERIFIED
+## Outcome: 5/5 finite diagnostics pass; 0/5 paper claims verified
 
-All five theorems from arXiv 2508.12674 are verified with faithful, reproducible evidence that directly tests each theorem's exact conditions.
+The audit produces reproducible finite evidence for five selected constructions
+from arXiv 2508.12674v2. These computations do not prove the theorems or
+establish their asymptotic and general-model claims, so the paper-level result
+remains **INCONCLUSIVE**.
 
 | Claim | Theorem | Verdict | What was tested | Scale |
 |---|---|---|---|---|
-| C1 | Thm 1 | **VERIFIED** | Cross-sect + long. stability, rate decay | n ≤ 2000 |
-| C2 | Thm 2 | **VERIFIED** | Convergence rate O(1/(ρ¹ᐟ²n¹ᐟ²)), ρ-param | n ≤ 800, ρ ∈ {0.25, 0.5, 1.0} |
-| C3 | Thm 3 | **VERIFIED** | Exact noise-free stability (deterministic) | n ≤ 2400 |
-| C4 | Thm 4 | **VERIFIED** | Both stability props + degree relaxation | n ≤ 2000 |
-| C5 | Prop 1 | **VERIFIED** | Dynamic Cheeger, exhaustive φ₂ | n ≤ 20, T ≤ 6 |
+| C1 | Thm 1 | **FINITE PROXY PASS** | Cross-sect + selected longitudinal stability, rate decay | n ≤ 2000 |
+| C2 | Thm 2 | **FINITE PROXY PASS** | Finite convergence-rate diagnostic, ρ ordering | n ≤ 800, ρ ∈ {0.25, 0.5, 1.0} |
+| C3 | Thm 3 | **FINITE PROXY PASS** | Selected population identities near machine precision | n ≤ 2400 |
+| C4 | Thm 4 | **FINITE PROXY PASS** | Finite stability sweep and one degree-varying construction | n ≤ 2000 |
+| C5 | Prop 1 | **FINITE PROXY PASS** | Dynamic Cheeger inequalities on finite graphs | n ≤ 20, T ≤ 6 |
 
-### Key improvements over previous (4/10) verification
+### Key improvements over previous (4/10) diagnostic run
 
-1. **Claim 3 (was INCONCLUSIVE):** Now verified exactly at population level — noise-free embeddings satisfy both stability properties to machine precision (~10⁻¹⁷).
-2. **Claim 2 (was TOY):** Now includes rate fitting with n × ρ sweep, bounded rate constants, and confirmed ρ-parameterization.
-3. **Claims 1, 4 (were TOY):** Now test exact theorem conditions at n up to 2000 with rate fitting, not proxy metrics.
-4. **Claim 5 (was TOY):** Extended from n ≤ 10 to n ≤ 20, T ≤ 6, with 28 diverse cases and 10 non-vacuous lower bounds.
+1. **Claim 3 (was INCONCLUSIVE):** Adds a finite population-identity check with errors near 10⁻¹⁷.
+2. **Claim 2 (was TOY):** Adds rate fitting with an n × ρ sweep and bounded finite rate constants.
+3. **Claims 1 and 4 (were TOY):** Use larger finite DSBM sweeps and selected stability metrics.
+4. **Claim 5 (was TOY):** Extends the finite graph suite to n ≤ 20, T ≤ 6, with 28 cases.
 
 
 ---
@@ -31,10 +34,10 @@ All five theorems from arXiv 2508.12674 are verified with faithful, reproducible
 -->
 ### Limitations
 
-- **Claims 1, 2, 4:** Finite-sample verification on DSBM. The theorems hold for the broader inhomogeneous random graph model, but we test the DSBM special case as assumed in the paper's proofs.
-- **Claim 5:** Exhaustive conductance is limited to n ≤ 20 (2²⁰ subsets). The inequality holds as a theorem for all n; our verification corroborates it on diverse non-trivial instances.
-- **Correction term discrepancy:** The paper's main text uses UΣ¹ᐟ² while the code and appendix use UΣ⁻¹ᐟ². We use Σ⁻¹ᐟ² (verified to produce exact stability) and document this discrepancy.
-- **Theorem 4 proof gap:** The supplementary material does not contain a proof of Theorem 4 despite the paper's claim. Our numerical verification corroborates the theorem's predictions.
+- **Claims 1, 2, 4:** Finite diagnostics on DSBM. The theorems cover broader models and asymptotic statements that are not established here.
+- **Claim 5:** Exhaustive conductance is limited to n ≤ 20 (2²⁰ subsets); finite inequality checks do not replace the general proof.
+- **Correction term discrepancy:** The paper's main text uses UΣ¹ᐟ² while the code and appendix use UΣ⁻¹ᐟ². We use Σ⁻¹ᐟ²; the selected finite population construction passes with that convention, and the discrepancy is documented.
+- **Theorem 4 proof gap:** The supplementary material does not contain a proof of Theorem 4 despite the paper's claim. This audit records finite numerical evidence only.
 
 ### Compute
 

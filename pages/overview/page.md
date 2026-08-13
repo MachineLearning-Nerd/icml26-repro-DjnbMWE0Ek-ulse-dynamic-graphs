@@ -3,29 +3,31 @@
 
 ---
 <!-- trackio-cell
-{"type": "markdown", "id": "cell_overview_v2", "created_at": "2026-07-25T12:00:00+00:00", "title": "Full-scale theorem verification — all 5 claims VERIFIED"}
+{"type": "markdown", "id": "cell_overview_v2", "created_at": "2026-07-25T12:00:00+00:00", "title": "Finite-proxy audit — paper-level result INCONCLUSIVE"}
 -->
-## ULSE (arXiv 2508.12674) — Rigorous Theorem Verification
+## ULSE (arXiv 2508.12674v2) — Finite-Proxy Audit
 
 **Paper:** Unfolded Laplacian Spectral Embedding: A Theoretically Grounded Approach to Dynamic Network Representation (Ezoe, Matsumoto, Hisano, 2025)
 
 **Source:** `https://ar5iv.labs.arxiv.org/html/2508.12674` — SHA-256 `1e0540aadecbed1e9abcf275cd289a2bd6a2a15c7096db54f0ab9c1ad5191fe0` — Retrieved 2026-07-25
 
-This reproduction replaces the previous toy-scale evidence with full-scale, faithful verification of each theorem's exact conditions. Every claim is tested at the stated assumptions, with deterministic seeds, rate fitting, ρ-parameterization, negative controls, and independent checkers.
+This audit replaces the previous toy-scale evidence with bounded finite diagnostics. The run uses deterministic seeds, rate fitting, ρ-parameterization, negative controls, and independent checkers, but it does not prove any theorem or establish a general asymptotic result.
 
 | Claim | Theorem | Verdict | Key evidence | Scale |
 |---|---|---|---|---|
-| C1 | Thm 1: ULSE-n1 stability | **VERIFIED** | Cross-sect & long. errors decay O(n⁻⁰·⁹) with n; within-comm dist → 0 | n up to 2000, 5 seeds |
-| C2 | Thm 2: Convergence rate | **VERIFIED** | Rate constant bounded; error × ρ¹ᐟ²n¹ᐟ² ≤ 0.49; ρ-param holds | n∈{100..800}, ρ∈{0.25..1.0}, 5 seeds |
-| C3 | Thm 3: Noise-free stability | **VERIFIED** | Exact to machine precision (~1e-17); cross-sect & long. both exact | n up to 2400 (deterministic) |
-| C4 | Thm 4: ULSE-n2 stability | **VERIFIED** | Both stability props; degree relaxation tested (1.86× degree variation) | n up to 2000, 5 seeds |
-| C5 | Prop 1: Dynamic Cheeger | **VERIFIED** | 28 cases, exhaustive φ₂, 10 non-vacuous lower bounds | n up to 20, T up to 6 |
+| C1 | Thm 1: ULSE-n1 stability | **FINITE PROXY PASS** | Cross-sect & selected longitudinal errors decay O(n⁻⁰·⁹) with n | n up to 2000, 5 seeds |
+| C2 | Thm 2: Convergence rate | **FINITE PROXY PASS** | Finite rate constant bounded; error × ρ¹ᐟ²n¹ᐟ² ≤ 0.49; ρ ordering holds | n∈{100..800}, ρ∈{0.25..1.0}, 5 seeds |
+| C3 | Thm 3: Noise-free stability | **FINITE PROXY PASS** | Selected identities agree near machine precision | n up to 2400 (deterministic) |
+| C4 | Thm 4: ULSE-n2 stability | **FINITE PROXY PASS** | Finite stability sweep; one degree-varying construction | n up to 2000, 5 seeds |
+| C5 | Prop 1: Dynamic Cheeger | **FINITE PROXY PASS** | 28 finite cases, exhaustive φ₂, 10 non-vacuous lower bounds | n up to 20, T up to 6 |
+
+**Paper claims independently verified: 0/5. Overall: INCONCLUSIVE.**
 
 **Run command:** `uv run python -m repro.src.verify_all`
 
-**Code:** `repro/src/core.py` (ULSE implementation), `repro/src/verify_all.py` (all 5 verifiers)
+**Code:** `repro/src/core.py` (ULSE implementation), `repro/src/verify_all.py` (five finite diagnostics)
 
-**Git SHA:** `9be4a61` on branch `orx/ulse-full-scale-theorem-verification`
+**Canonical branch:** `main` (the historical experiment branch is documented in `BRANCH_AUDIT.md`)
 
 **Runtime:** ~60 seconds, local CPU (8 cores, 16 GB RAM). NumPy + SciPy only.
 
@@ -53,6 +55,8 @@ This reproduction replaces the previous toy-scale evidence with full-scale, fait
 -->
 ### Historical rejected baseline
 
-The previous verification (commit `b1097e2`, judged 4/10) used toy-scale DSBM simulations with proxy metrics (within/between distance ratio) on small graphs (n=120, K=3, T=4). It did not test the exact theorem conditions, fit the convergence rate, verify noise-free stability at population level, or test the degree relaxation for ULSE-n2.
+The previous diagnostic run (commit `b1097e2`, judged 4/10) used toy-scale DSBM simulations with proxy metrics (within/between distance ratio) on small graphs (n=120, K=3, T=4). The current run expands the finite diagnostics but still does not prove the theorems.
 
-The current verification supersedes all historical evidence. Individual claim pages below retain the historical content under clearly labeled "Historical rejected baseline" sections.
+The current finite-proxy audit supersedes all historical evidence for the
+scoped numerical run. Individual claim pages retain historical content under
+clearly labeled sections; their finite pass labels do not mean theorem proof.

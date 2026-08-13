@@ -1,7 +1,7 @@
 [project]
 name = "ulse-repro"
 version = "0.1.0"
-description = "Reproduction of ULSE (arXiv 2508.12674) theorem verification"
+description = "Finite evidence audit for ULSE (arXiv 2508.12674)"
 requires-python = ">=3.11,<3.14"
 dependencies = ["numpy>=2.0,<3.0", "scipy>=1.13,<2.0"]
 

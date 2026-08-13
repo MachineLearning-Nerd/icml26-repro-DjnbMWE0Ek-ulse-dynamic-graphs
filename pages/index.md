@@ -1,14 +1,18 @@
-# Repro - ULSE Dynamic Graph Embedding (arXiv 2508.12674)
+# ULSE Dynamic Graph Embedding (arXiv 2508.12674v2)
 
-## Full-scale theorem verification — all 5 claims VERIFIED
+## Finite-proxy audit — paper-level result INCONCLUSIVE
 
 | Claim | Verdict | Evidence |
 |---|---|---|
-| C1 cross-sectional + longitudinal stability (Thm 1) | VERIFIED | n ≤ 2000, rate decay O(n⁻⁰·⁹) |
-| C2 convergence rate O(1/(ρ¹ᐟ²n¹ᐟ²)) (Thm 2) | VERIFIED | n × ρ sweep, bounded rate constants |
-| C3 noise-free stability (Thm 3) | VERIFIED | Exact to ~10⁻¹⁷, n ≤ 2400 |
-| C4 ULSE-n2 stability + degree relaxation (Thm 4) | VERIFIED | n ≤ 2000, degree variation tested |
-| C5 dynamic Cheeger inequality (Prop 1) | VERIFIED | 28 cases, n ≤ 20, exhaustive φ₂ |
+| C1 cross-sectional + longitudinal stability (Thm 1) | FINITE PROXY PASS | n ≤ 2000, rate decay O(n⁻⁰·⁹) |
+| C2 convergence rate O(1/(ρ¹ᐟ²n¹ᐟ²)) (Thm 2) | FINITE PROXY PASS | n × ρ sweep, bounded finite rate constants |
+| C3 noise-free stability (Thm 3) | FINITE PROXY PASS | Selected identities near 10⁻¹⁷, n ≤ 2400 |
+| C4 ULSE-n2 stability + degree relaxation (Thm 4) | FINITE PROXY PASS | n ≤ 2000, one degree-varying construction |
+| C5 dynamic Cheeger inequality (Prop 1) | FINITE PROXY PASS | 28 finite cases, n ≤ 20, exhaustive φ₂ |
+
+Finite diagnostics passed: **5/5**. Paper claims independently verified:
+**0/5**. See the [conclusion](#/conclusion) and the repository README for
+the evidence boundary.
 
 ## Pages
 

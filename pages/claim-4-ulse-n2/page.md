@@ -33,7 +33,7 @@
 
 ---
 <!-- trackio-cell
-{"type": "markdown", "id": "c4_v2_results", "created_at": "2026-07-25T12:00:00+00:00", "title": "Results — VERIFIED"}
+{"type": "markdown", "id": "c4_v2_results", "created_at": "2026-07-25T12:00:00+00:00", "title": "Results — FINITE PROXY PASS"}
 -->
 ## Results — Uniform B stability
 
@@ -44,9 +44,9 @@
 | 1000 | 0.0054 | 0.0048 | 0.0292 |
 | 2000 | 0.0029 | 0.0025 | 0.0208 |
 
-**Cross-sectional decay exponent:** 0.890 (> 0.5, confirming O(n⁻¹ᐟ²) upper bound)
+**Cross-sectional decay exponent:** 0.890 (> 0.5, consistent with the finite O(n⁻¹ᐟ²) diagnostic)
 
-Both errors decay to zero, confirming ULSE-n2 satisfies both stability conditions.
+Both selected errors decay to zero in this finite DSBM sweep.
 
 ## Results — Degree-uniformity relaxation
 
@@ -54,9 +54,12 @@ Both errors decay to zero, confirming ULSE-n2 satisfies both stability condition
 |---|---|---|
 | B scaled [1.0, 0.7, 1.3, 0.9] | 1.86× | 0.0127 |
 
-Cross-sectional stability holds even with significant degree variation across snapshots, confirming the relaxation claimed in Theorem 4.
+Cross-sectional stability holds in the selected degree-varying construction,
+providing finite evidence consistent with the relaxation in Theorem 4.
 
-**VERDICT: VERIFIED.** ULSE-n2 satisfies both cross-sectional and longitudinal stability. The degree-uniformity relaxation holds: longitudinal stability does not require D̃⁽ᵗ⁾ = D̃⁽ᵘ⁾, unlike ULSE-n1.
+**FINITE PROXY PASS.** The selected ULSE-n2 sweep and degree-varying
+construction pass their local criteria. They do not establish the general
+Theorem 4 statement.
 
 **Code:** `repro/src/verify_all.py` → `verify_claim4()`
 
