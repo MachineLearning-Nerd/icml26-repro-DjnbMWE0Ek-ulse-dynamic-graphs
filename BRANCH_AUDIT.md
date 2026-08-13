@@ -31,7 +31,7 @@ evidence.
 
 ## Live verification
 
-The final publication check must confirm:
+Verified on 2026-08-13 against the canonical GitHub repository:
 
 1. GitHub metadata uses `icml26-ulse-dynamic-graphs` and `main` as default.
 2. The only remote branch is `main`.
@@ -40,6 +40,10 @@ The final publication check must confirm:
 4. Reachable commit author and committer fields use the MachineLearning-Nerd
    no-reply identity.
 5. The remote homepage points to `https://arxiv.org/abs/2508.12674`.
+
+The canonical homepage, description, default branch, sole remote branch, and
+MachineLearning-Nerd author/committer identity were all observed after the
+rename and force-push. The final `main` tip is `7ab02f3`.
 
 GitHub metadata, branch state, and commit attribution are administrative
 checks; they are not paper-claim evidence.
